@@ -1,5 +1,7 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.5/vue.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.12.5/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/solarized_light.min.css">
 
 <style type="text/css">
 html, body, #editor {
@@ -30,10 +32,6 @@ textarea {
   font-family: 'Monaco', courier, monospace;
   padding: 20px;
 }
-
-code {
-  color: #f66;
-}
 </style>
 
 <div id="editor">
@@ -42,6 +40,14 @@ code {
 </div>
 
 <script>
+(function() {
+
+marked.setOptions({
+    highlight: function(code, lang) {
+        return hljs.highlightAuto(code, [lang]).value;
+    }
+});
+
 new Vue({
     el: '#editor',
     data: {
@@ -51,4 +57,6 @@ new Vue({
         marked: marked
     }
 })
+
+}).call(this);
 </script>
